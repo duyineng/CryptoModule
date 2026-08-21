@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package kmc.v1;
+
+// Bodies for HTTPS mTLS calls. Headers still carry X-Request-Id.
+// Content-Type: application/x-protobuf
+
+message ApplyWorkKeyRequest {
+  string algorithm = 1;
+  uint32 key_length = 2;
+}
+
+message RotateWorkKeyRequest {
+  string algorithm = 1;
+  uint32 key_length = 2;
+}
+
+message WorkKeyResponse {
+  string request_id = 1;
+  string key_id = 2;
+  string algorithm = 3;
+  uint32 key_length = 4;
+  string status = 5;
+  string created_at = 6;
+  string expires_at = 7;
+  int64 expires_at_unix = 8;
+  bytes key_material = 9;
+}
+
+message ErrorResponse {
+  string code = 1;
+  string message = 2;
+}
+
+// Named-pipe SDK framing: 4-byte big-endian length + protobuf payload.
+
+message SdkRequest {
+  string request_id = 1;
+  oneof op {
+    EncryptOp encrypt = 2;
+    DecryptOp decrypt = 3;
+  }
+}
+
+message EncryptOp {
+  bytes plaintext = 1;
+}
+
+message DecryptOp {
+  string key_id = 1;
+  bytes nonce = 2;
+  bytes ciphertext = 3;
+  bytes auth_tag = 4;
+}
+
+message SdkResponse {
+  string request_id = 1;
+  string status = 2;
+  string error = 3;
+  string key_id = 4;
+  bytes nonce = 5;
+  bytes ciphertext = 6;
+  bytes auth_tag = 7;
+  bytes plaintext = 8;
+}

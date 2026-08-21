@@ -1,0 +1,38 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "vs2022",
+      "displayName": "Visual Studio 2022 x64 + vcpkg",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "VCPKG_INSTALLED_DIR": "D:/dev/vcpkg_installed/crypto-module",
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "displayName": "Build Debug",
+      "configurePreset": "vs2022",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release",
+      "displayName": "Build Release",
+      "configurePreset": "vs2022",
+      "configuration": "Release"
+    }
+  ]
+}

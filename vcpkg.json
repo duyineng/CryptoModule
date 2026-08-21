@@ -1,0 +1,12 @@
+{
+  "name": "crypto-module",
+  "dependencies": [
+    "openssl",
+    "protobuf",
+    {
+      "name": "curl",
+      "default-features": false,
+      "features": ["openssl"]
+    }
+  ]
+}

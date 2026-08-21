@@ -1,0 +1,17 @@
+build/
+out/
+.vs/
+CMakeUserPresets.json
+vcpkg_installed/
+kms/data/
+kms/__pycache__/
+kms/*_pb2.pyi
+__pycache__/
+.venv/
+*.pyc
+*.user
+*.suo
+*.sdf
+*.VC.db
+CMakeCache.txt
+CMakeFiles/

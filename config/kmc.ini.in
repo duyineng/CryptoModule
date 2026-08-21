@@ -1,0 +1,21 @@
+; Generated next to kmc.exe. Relative paths are resolved from this file.
+
+[kms]
+base_url = https://127.0.0.1:8443
+connect_timeout_seconds = 10
+request_timeout_seconds = 30
+
+[tls]
+ca_cert = @KMC_CA_CERT@
+client_cert = @KMC_CLIENT_CERT@
+client_key = @KMC_CLIENT_KEY@
+
+[key]
+algorithm = AES
+key_length = 256
+; Lab: rotate 60s before expiry. KMS default TTL is 300s, so rotation ~4 min after start.
+; Production would be 7200 (2 hours) with a much longer server TTL.
+rotation_lead_seconds = 60
+
+[pipe]
+name = \\.\pipe\KMC_Crypto
